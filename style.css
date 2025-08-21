@@ -1,0 +1,602 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    color: #333;
+}
+
+.header {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 25px 0;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.2em;
+}
+
+.main-container {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.filter-btn {
+    padding: 12px 25px;
+    border: none;
+    background-color: #e9ecef;
+    color: #495057;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.filter-btn.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.filter-btn:hover {
+    background-color: #d8dbe0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    font-size: 1.8em;
+    margin: 0;
+    color: #333;
+}
+
+.add-task-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.add-task-btn:hover {
+    background-color: #218838;
+}
+
+#search-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Animations and Visual Feedback */
+li {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 18px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
+    border-left: 5px solid transparent;
+}
+
+li.new-task {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+li.deleting {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+li:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-left-color: #007bff;
+}
+
+li.sortable-chosen {
+    background-color: #e9f5ff;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transform: rotate(1deg);
+}
+
+#empty-state {
+    text-align: center;
+    color: #888;
+    font-size: 1.2em;
+    margin-top: 50px;
+}
+
+
+li .task-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+li .task-details {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.drag-handle {
+    font-size: 1.2em;
+    cursor: grab;
+    margin-right: 15px;
+    color: #6c757d;
+}
+
+li input[type="checkbox"] {
+    transform: scale(1.1);
+    margin-right: 10px;
+}
+
+.task-text {
+    flex-grow: 1;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.subtask-box {
+    background-color: #e9ecef;
+    color: #495057;
+    font-size: 0.9em;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+}
+
+.due-date {
+    color: #6c757d;
+    font-size: 0.95em;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-btn,
+.delete-btn,
+.update-subtask-btn {
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.update-subtask-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.update-subtask-btn:hover {
+    background-color: #0056b3;
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Progress bar styles */
+.progress-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.progress-bar-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    height: 8px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: #28a745;
+    border-radius: 5px;
+    transition: width 0.4s ease-in-out;
+}
+
+.progress-text {
+    font-size: 0.9em;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.progress-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+.close-btn {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+#task-form h3 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#task-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+#task-form input[type="text"],
+#task-form input[type="date"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+#task-form input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
+#subtask-management {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+#subtask-management h4 {
+    font-size: 1.4em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#subtask-list-modal li {
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #333;
+}
+
+.subtask-input-container-modal {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#subtask-input-modal {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+}
+
+#add-subtask-btn-modal {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+#add-subtask-btn-modal:hover {
+    background-color: #0056b3;
+}
+
+#task-form button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    margin-top: 25px;
+    width: 100%;
+}
+
+#task-form button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Subtask Details View styles */
+#subtask-details-view {
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#subtask-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#subtask-header h3 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #333;
+}
+
+#subtask-header span {
+    color: #6c757d;
+    font-size: 0.95em;
+}
+
+#subtask-details-view hr {
+    border: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+#subtask-list li {
+    background-color: #f8f9fa;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #333;
+}
+
+#subtask-list li:hover {
+    cursor: grab;
+}
+
+.progress-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.progress-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-input {
+    width: 70px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.subtask-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.subtask-delete-btn,
+.update-btn,
+.update-progress-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.update-btn {
+    background-color: #007bff;
+}
+
+.update-progress-btn {
+    background-color: #28a745;
+}
+
+.back-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Modal Subtask styles (Reiterated for clarity) */
+#subtask-list-modal li {
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subtask-input-container-modal {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#subtask-input-modal {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+#add-subtask-btn-modal {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Updated CSS for subtask completion */
+.subtask-completed {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+}
+
+.completed-label {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: default;
+    font-size: 0.9em;
+}
+
+.completed-label .checkmark {
+    font-size: 1.1em;
+    line-height: 1;
+}
+
+/* Flatpickr customization */
+.flatpickr-calendar {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange, .flatpickr-day.selected.inRange, .flatpickr-day.startRange.inRange, .flatpickr-day.endRange.inRange {
+    background: #007bff;
+    border-color: #007bff;
+}

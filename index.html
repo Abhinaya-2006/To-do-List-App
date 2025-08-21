@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+</head>
+<body>
+
+    <header class="header">
+        <h1>Todo App</h1>
+    </header>
+
+    <div class="main-container">
+        
+        <div id="main-task-view">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="today">Today</button>
+                <button class="filter-btn" data-filter="pending">Pending</button>
+                <button class="filter-btn" data-filter="overdue">Overdue</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+
+            <div class="tasks-section">
+                <div class="section-header">
+                    <h2>Tasks</h2>
+                    <button class="add-task-btn" id="show-modal-btn">+ Add Task</button>
+                </div>
+                <input type="text" id="search-input" placeholder="Search tasks...">
+                <ul id="task-list">
+                    </ul>
+            </div>
+            
+        </div>
+
+        <div id="subtask-details-view" style="display: none;">
+            <button id="back-to-main-btn" class="back-btn">← Back to Main Tasks</button>
+            <div id="subtask-header">
+                <h3 id="current-main-task-title"></h3>
+                <span id="current-main-task-date"></span>
+            </div>
+            <hr>
+            <ul id="subtask-list">
+                </ul>
+        </div>
+
+    </div>
+
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3 id="modal-title">Add New Task</h3>
+            <form id="task-form">
+                <label for="task-text">Task Name:</label>
+                <input type="text" id="task-text" required>
+                
+                <label for="due-date">Due Date:</label>
+                <input type="date" id="due-date">
+
+                <div id="subtask-management">
+                    <h4>Subtasks (optional)</h4>
+                    <ul id="subtask-list-modal">
+                        </ul>
+                    <div class="subtask-input-container-modal">
+                        <input type="text" id="subtask-input-modal" placeholder="Enter a new subtask">
+                        <button type="button" id="add-subtask-btn-modal">Add</button>
+                    </div>
+                </div>
+                
+                <input type="hidden" id="task-id">
+                <button type="submit" id="save-task-btn">Save Task</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="script.js"></script>
+</body>
+</html>
